@@ -1,5 +1,4 @@
 using System;
-using Hanssens.Net;
 public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
@@ -18,7 +17,7 @@ public class Journal
         _entries.Add(entry);
         entry.DisplayEntry();
         if (promptGen._blessingPrompts.Contains(entry._prompt)){
-            SaveEntry("entry._response", "blessings.csv");
+            SaveEntry(entry._response, "blessings.csv");
         }
     }
     public void HandleDisplay()

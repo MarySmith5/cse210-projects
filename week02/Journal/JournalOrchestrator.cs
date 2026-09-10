@@ -1,4 +1,8 @@
 using System;
+
+// AI added an option to count your blessings. 
+// I save the responses to prompts that show gratitude 
+// and return them when option 5 is selected.
 public class JournalOrchestrator
 {
     public string _menu = $"""
