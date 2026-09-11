@@ -2,19 +2,21 @@ using System;
 public class Entry
 {
 
-    public DateTime _date = DateTime.Now;
+    public string _date;
 
     public string _response;
 
     public string _completeEntry;
 
-    PromptGenerator promptGen;
+    PromptGenerator _promptGen;
     public string _prompt;
 
     public Entry()
     {
-        promptGen = new PromptGenerator();
-        _prompt = promptGen.GetPrompt();
+        DateTime date = DateTime.Now;
+        _promptGen = new PromptGenerator();
+        _prompt = _promptGen.GetPrompt();
+        _date = date.ToShortDateString();
     }
 
     public string DisplayEntry()

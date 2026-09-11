@@ -2,10 +2,11 @@ using System;
 public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
-    public PromptGenerator promptGen;
+    public List<Entry> _newEntries = new List<Entry>();
+    public PromptGenerator _promptGen;
     public Journal()
     {
-        promptGen = new PromptGenerator();
+        _promptGen = new PromptGenerator();
     }
 
     public void HandleWrite()
@@ -14,15 +15,19 @@ public class Journal
         Console.WriteLine(entry._prompt);
         Console.Write(">");
         entry._response = Console.ReadLine();
-        _entries.Add(entry);
+        _newEntries.Add(entry);
         entry.DisplayEntry();
-        if (promptGen._blessingPrompts.Contains(entry._prompt)){
-            SaveEntry(entry._response, "blessings.csv");
+        if (_promptGen._blessingPrompts.Contains(entry._prompt)){
+            SaveEntry(entry, "blessings.csv");
         }
     }
     public void HandleDisplay()
     {
         foreach (Entry entry in _entries)
+        {
+            entry.DisplayEntry();
+        }
+        foreach (Entry entry in _newEntries)
         {
             entry.DisplayEntry();
         }
@@ -33,20 +38,20 @@ public class Journal
     {
         Console.Write("Enter your journal csv file name: ");
         string fileName = Console.ReadLine();
-        foreach (Entry entry in _entries)
+        foreach (Entry entry in _newEntries)
         {
-            SaveEntry(entry.DisplayEntry(), fileName);
+            SaveEntry(entry, fileName);
         }
 
         Console.WriteLine("CSV file saved successfully!");
 
     }
 
-    public void SaveEntry(String entryData, String fileName)
+    public void SaveEntry(Entry entry, String fileName)
     {
-        using (StreamWriter writer = new StreamWriter(fileName, append: true))
+        using (StreamWriter writer = new StreamWriter(fileName, append:true))
         {
-            writer.WriteLine(string.Join(Environment.NewLine, entryData));
+            writer.WriteLine($"{entry._date}|{entry._prompt}|{entry._response}");
         }
     }
 
@@ -54,16 +59,31 @@ public class Journal
     {
         Console.Write("Enter your journal csv file name: ");
         string fileName = Console.ReadLine();
-        LoadEntries(fileName);
+        try
+        {
+            LoadEntries(fileName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("I couldn't find that file.");
+        }
     }
 
     public void LoadEntries(String fileName)
     {
+   
         IEnumerable<string> lines = File.ReadLines(fileName);
         foreach (string line in lines)
         {
-            Console.WriteLine(line);
-        }
+            string[] parts = line.Split("|");
+            Entry entry = new Entry();
+            entry._date = parts[0];
+            entry._prompt = parts[1];
+            entry._response = parts[2];
+            entry.DisplayEntry();
+            _entries.Add(entry);
+        }  
+        
     }
 
     public void CountBlessings()
@@ -84,7 +104,7 @@ public class Journal
                 Console.WriteLine(blessingEntry._prompt);
                 Console.Write(">");
                 blessingEntry._response = Console.ReadLine();
-                SaveEntry(blessingEntry.DisplayEntry(), "blessings.csv");
+                SaveEntry(blessingEntry, "blessings.csv");
                 Console.WriteLine("Saved your entry!");
             }
         }

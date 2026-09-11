@@ -1,8 +1,5 @@
 using System;
 
-// AI added an option to count your blessings. 
-// I save the responses to prompts that show gratitude 
-// and return them when option 5 is selected.
 public class JournalOrchestrator
 {
     public string _menu = $"""
@@ -16,7 +13,7 @@ public class JournalOrchestrator
         Enter the number of your choice: 
         """;
 
-    public Journal journal = new Journal();
+    public Journal _journal = new Journal();
 
     public JournalOrchestrator() { }
 
@@ -28,30 +25,30 @@ public class JournalOrchestrator
             OrchestrateSelection(selection);
             selection = DisplayMenu();
         }
-        journal.HandleQuit();
+        _journal.HandleQuit();
     }
 
     public void OrchestrateSelection(int selection)
     {
         if (selection == 1)
         {
-            journal.HandleWrite();
+            _journal.HandleWrite();
         }
         else if (selection == 2)
         {
-            journal.HandleDisplay();
+            _journal.HandleDisplay();
         }
         else if (selection == 3)
         {
-            journal.HandleLoad();
+            _journal.HandleLoad();
         }
         else if (selection == 4)
         {
-            journal.HandleSave();
+            _journal.HandleSave();
         }
         else if (selection == 5)
         {
-            journal.CountBlessings();
+            _journal.CountBlessings();
         }
         else
         {
