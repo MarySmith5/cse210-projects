@@ -68,7 +68,26 @@ public class Journal
 
     public void CountBlessings()
     {
-        LoadEntries("blessings.csv");
+        try
+        {
+            LoadEntries("blessings.csv");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("I wasn't able to retrieve any recorded blessings.");
+            Console.Write("Would you like to add one now? y/n: ");
+            string decsion = Console.ReadLine();
+            if (decsion == "y")
+            {
+                Entry blessingEntry = new Entry();
+                blessingEntry._prompt = "How did I see the hand of the Lord in my life today?";
+                Console.WriteLine(blessingEntry._prompt);
+                Console.Write(">");
+                blessingEntry._response = Console.ReadLine();
+                SaveEntry(blessingEntry.DisplayEntry(), "blessings.csv");
+                Console.WriteLine("Saved your entry!");
+            }
+        }
     }
 
     public void HandleQuit()
