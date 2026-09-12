@@ -41,8 +41,9 @@ public class Journal
         foreach (Entry entry in _newEntries)
         {
             SaveEntry(entry, fileName);
+            _entries.Add(entry);
         }
-
+        _newEntries.Clear();
         Console.WriteLine("CSV file saved successfully!");
 
     }
@@ -59,9 +60,10 @@ public class Journal
     {
         Console.Write("Enter your journal csv file name: ");
         string fileName = Console.ReadLine();
+        _entries.Clear();
         try
         {
-            LoadEntries(fileName);
+            LoadEntries(fileName, _entries);
         }
         catch (Exception e)
         {
@@ -69,7 +71,7 @@ public class Journal
         }
     }
 
-    public void LoadEntries(String fileName)
+    public void LoadEntries(String fileName, List<Entry> entries)
     {
    
         IEnumerable<string> lines = File.ReadLines(fileName);
@@ -81,7 +83,7 @@ public class Journal
             entry._prompt = parts[1];
             entry._response = parts[2];
             entry.DisplayEntry();
-            _entries.Add(entry);
+            entries.Add(entry);
         }  
         
     }
@@ -90,7 +92,7 @@ public class Journal
     {
         try
         {
-            LoadEntries("blessings.csv");
+            LoadEntries("blessings.csv", new List<Entry>());
         }
         catch (Exception e)
         {
