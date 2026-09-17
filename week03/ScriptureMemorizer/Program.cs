@@ -1,31 +1,30 @@
 using System;
-
+//  I enriched the program by loading a list of scriptures from a .txt file, 
+// so the game would have more than one scripture to memorize.
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Hello World! This is the ScriptureMemorizer Project.");
         ScriptureRepository scriptureRepository = new ScriptureRepository();
-        int countScriptures = 0;
-        while (countScriptures < scriptureRepository.GetScriptures().Count)
+        foreach (Scripture scripture in scriptureRepository.GetScriptures())
         {
-            Scripture scripture = scriptureRepository.GetNextScripture();
-            Console.Write("Click 'enter' to continue or enter 'quit': ");
-            string response = Console.ReadLine().ToLower();
+            scripture.DisplayScripture();
+            string response = "";
             while (response != "quit" && !scripture.IsWordListAllHidden())
             {
-                scripture.DisplayScripture();
-                scripture.UpdateScriptureText();
                 Console.Write("Click 'enter' to continue or enter 'quit': ");
                 response = Console.ReadLine().ToLower();
+                scripture.UpdateWordList();
+                scripture.DisplayScripture();
+
             }
             if (response == "quit")
             {
                 Console.WriteLine("See you later!");
                 break;
             }
-            countScriptures += countScriptures;
         }
-        Console.WriteLine("Congratulations! You have mastered all the Book of Mormon seminary verses!");
+
     }
 }

@@ -1,46 +1,45 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Scripture
 {
     private string _reference;
-    private string _scriptureText;
     private List<Word> _wordList;
+    private List<int> _indexList;
 
-    public Scripture()
+    public Scripture(string reference, string text)
     {
-        _wordList = CreateWordList();
-    }
-
-    public void SetReference(string reference)
-    {
+        _wordList = CreateWordList(text);
         _reference = reference;
+        _indexList = SetIndexList();
     }
 
-    public string GetReference()
+    public List<int> SetIndexList()
     {
-        return _reference;
+        List<int> indexList = Enumerable.Range(0, _wordList.Count).ToList();
+        Random rand = new Random();
+        int n = indexList.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rand.Next(n + 1);
+            int value = indexList[k];
+            indexList[k] = indexList[n];
+            indexList[n] = value;
+        }
+        return indexList;
     }
 
-    public void SetScriptureText(string scriptureText)
-    {
-        _scriptureText = scriptureText;
-    }
-
-    public string GetScriptureText()
-    {
-        return _scriptureText;
-    }
-
-    private List<Word> CreateWordList()
+    private List<Word> CreateWordList(string text)
     {
         List<Word> wordList = new List<Word>();
-        string[] parts = _scriptureText.Split(" ");
+        string[] parts = text.Split(" ");
         foreach (string part in parts)
         {
-            Word word = new Word();
-            word.SetWordText(part);
+            Word word = new Word(part);
             wordList.Add(word);
         }
         return wordList;
@@ -48,21 +47,24 @@ public class Scripture
 
     public void DisplayScripture()
     {
-        Console.WriteLine($"{_reference} {_scriptureText}");
+        string scriptureText = "";
+        foreach (Word word in _wordList)
+        {
+            scriptureText += word.GetWordText() + " ";
+        }
+        Console.WriteLine($"{_reference} {scriptureText}");
     }
 
-    public void UpdateScriptureText()
+    public void UpdateWordList()
     {
-        Random rand = new Random();
         int counter = 0;
-        while (counter < 3)
+        while (counter < 3 && counter < _indexList.Count)
         {
-            int indexNum = rand.Next(0, _wordList.Count);
-            _wordList[indexNum].HideWord();
-            _wordList[indexNum].SetIsHidden(true);
+            _wordList[_indexList[0]].HideWord();
+            _wordList[_indexList[0]].SetIsHidden(true);
+            _indexList.RemoveAt(0);
             counter += 1;
         }
-
     }
     
     public bool IsWordListAllHidden()
