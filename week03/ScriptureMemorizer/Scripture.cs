@@ -6,11 +6,11 @@ using System.Linq;
 
 public class Scripture
 {
-    private string _reference;
+    private Reference _reference;
     private List<Word> _wordList;
     private List<int> _indexList;
 
-    public Scripture(string reference, string text)
+    public Scripture(Reference reference, string text)
     {
         _wordList = CreateWordList(text);
         _reference = reference;
@@ -52,7 +52,7 @@ public class Scripture
         {
             scriptureText += word.GetWordText() + " ";
         }
-        Console.WriteLine($"{_reference} {scriptureText}");
+        Console.WriteLine($"{_reference.DisplayText()} {scriptureText}");
     }
 
     public void UpdateWordList()

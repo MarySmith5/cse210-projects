@@ -15,11 +15,21 @@ public class ScriptureRepository
     private List<Scripture> LoadScriptures()
     {
         List<Scripture> scriptures = new List<Scripture>();
-        string[] lines = System.IO.File.ReadAllLines("data copy.txt");
+        string[] lines = System.IO.File.ReadAllLines("data.txt");
         foreach (string line in lines)
         {
+            Reference reference;
             string[] parts = line.Split("|");
-            Scripture scripture = new Scripture(parts[0], parts[1]);
+            if (string.IsNullOrEmpty(parts[3]))
+            {
+                reference = new Reference(parts[0], int.Parse(parts[1]), int.Parse(parts[2]));
+            }
+            else
+            {
+                reference = new Reference(parts[0], int.Parse(parts[1]), int.Parse(parts[2]), int.Parse(parts[3]));
+            }
+
+            Scripture scripture = new Scripture(reference, parts[4]);
             scriptures.Add(scripture);
         }
         return scriptures;

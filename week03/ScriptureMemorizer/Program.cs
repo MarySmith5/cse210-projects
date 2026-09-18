@@ -21,10 +21,10 @@ class Program
             }
             if (response == "quit")
             {
-                Console.WriteLine("See you later!");
                 break;
             }
         }
+        Console.WriteLine("All done! Goodbye.");
 
     }
 }
