@@ -35,11 +35,14 @@ public class ScriptureRepository
         return scriptures;
 
     }
-    
-    public List<Scripture> GetScriptures()
+
+
+    public Scripture GetAScripture()
     {
-        return _scriptures;
+        Random randomGenerator = new Random();
+        int num = randomGenerator.Next(0, _scriptures.Count);
+        return _scriptures[num];
     }
 
-    
+
 }

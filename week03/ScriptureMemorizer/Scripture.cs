@@ -17,7 +17,7 @@ public class Scripture
         _indexList = SetIndexList();
     }
 
-    public List<int> SetIndexList()
+    private List<int> SetIndexList()
     {
         List<int> indexList = Enumerable.Range(0, _wordList.Count).ToList();
         Random rand = new Random();
