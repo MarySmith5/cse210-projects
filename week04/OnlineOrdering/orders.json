@@ -1,0 +1,21 @@
+
+[{
+    "_customer":{
+        "_name":"Mary Smith",
+        "_address":{
+            "_streetAddress":"1164 Morse Ave.",
+            "_city":"Sunnyvale",
+            "_state":"CA",
+            "_country":"USA"
+        }
+    },
+    "_products":[
+        {
+            "_name": "soap",
+            "_id":1,
+            "_price":2.75,
+            "_quantity":3
+        }
+    ]
+}]
+
