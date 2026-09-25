@@ -5,10 +5,10 @@ public class Product
 {
     private string _name;
     private string _id;
-    private float _price;
+    private double _price;
     private int _quantity;
 
-    public Product(string name, string id, float price, int quantity)
+    public Product(string name, string id, double price, int quantity)
     {
         _name = name;
         _id = id;
@@ -26,7 +26,7 @@ public class Product
         return _id;
     }
 
-    public float CalculateTotalCost()
+    public double CalculateTotalCost()
     {
         return _price * _quantity;
     }

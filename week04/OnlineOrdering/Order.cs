@@ -5,10 +5,10 @@ public class Order
     private List<Product> _products;
     private Customer _customer;
 
-    public Order(Customer customer, List<Product> products)
+    public Order(Customer customer)
     {
         _customer = customer;
-        _products = products;
+        _products = new List<Product>();
     }
 
     public void AddProduct(Product product)
@@ -21,7 +21,7 @@ public class Order
         Console.WriteLine("PackingLabel:");
         foreach (Product product in _products)
         {
-            Console.WriteLine($"{product.GetId} {product.GetName}");
+            Console.WriteLine($"{product.GetId()} {product.GetName()}");
         }
     }
 
@@ -35,17 +35,17 @@ public class Order
 
     public void DisplayTotal()
     {
-        float subtotal = CalculateProductCost();
+        double subtotal = CalculateProductCost();
         Console.WriteLine($"Subtotal: ${subtotal}");
-        float shipping = DetermineShipping();
+        int shipping = DetermineShipping();
         Console.WriteLine($"Shipping: ${shipping}");
         Console.WriteLine($"Total: ${subtotal + shipping}");
 
     }
 
-    private float CalculateProductCost()
+    private double CalculateProductCost()
     {
-        float totalProductCost = 0;
+        double totalProductCost = 0;
         foreach (Product product in _products)
         {
             totalProductCost += product.CalculateTotalCost();
@@ -53,9 +53,9 @@ public class Order
         return totalProductCost;
     }
     
-    private float DetermineShipping()
+    private int DetermineShipping()
     {
-        float shipping;
+        int shipping;
         if (_customer.IsUS())
         {
             shipping = 5;
