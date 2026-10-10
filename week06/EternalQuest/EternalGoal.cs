@@ -17,6 +17,6 @@ public class EternalGoal : Goal
 
     public override string GetDetailsString()
     {
-        return $"EternalGoal:{base.GetName()}|{base.GetDescription()}|{base.GetPoints()}";
+        return $"EternalGoal:{GetName()}|{GetDescription()}|{GetPoints()}";
     }
 }
