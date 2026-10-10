@@ -8,7 +8,7 @@ public class GoalManager
 
     private int _score = 0;
 
-    private GoalManager() { }
+    public GoalManager() { }
 
     public void Start()
     {
