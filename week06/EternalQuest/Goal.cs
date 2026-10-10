@@ -20,11 +20,6 @@ public abstract class Goal
         return false;
     }
 
-    public virtual int GetPenalty()
-    {
-        return 0;
-    }
-
     public string GetStringRepresentationDetails()
     {
         return $"{_shortName} ({_description})";

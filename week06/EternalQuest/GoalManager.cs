@@ -8,7 +8,7 @@ public class GoalManager
 
     private int _score = 0;
 
-    public GoalManager() { }
+    private GoalManager() { }
 
     public void Start()
     {
@@ -154,7 +154,7 @@ public class GoalManager
         }
     }
 
-    public void RecordEvent()
+    private void RecordEvent()
     {
         ListGoalNames();
         Console.Write("Which goal would you like to record? ");
@@ -182,7 +182,7 @@ public class GoalManager
         }
     }
 
-    public void LoadGoals()
+    private void LoadGoals()
     {
         Console.Write("What is the name for the goal file? ");
         string filename = Console.ReadLine();

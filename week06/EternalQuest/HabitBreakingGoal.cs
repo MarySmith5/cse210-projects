@@ -8,11 +8,6 @@ public class HabitBreakingGoal : Goal
         _penalty = -penalty;
     }
 
-    public override int GetPenalty()
-    {
-        return _penalty;
-    }
-
     public override int RecordEvent()
     {
         Console.Write("Did you perform the bad habit today? y or n: ");
