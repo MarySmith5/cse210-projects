@@ -9,14 +9,16 @@ public class SimpleGoal : Goal
         _isComplete = false;
     }
 
-    public override void recordEvent()
+    public override int RecordEvent()
     {
-        throw new NotImplementedException();
+        _isComplete = true;
+        Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!");
+        return GetPoints();
     }
 
     public override bool IsComplete()
     {
-        throw new NotImplementedException();
+        return _isComplete;
     }
 
     public override string GetStringRepresentation()
@@ -26,6 +28,12 @@ public class SimpleGoal : Goal
         {
             completion = "[X]";
         }
-        return $"{completion} {base.GetDetailsString()}";
+        return $"{completion} {base.GetStringRepresentationDetails()}";
     }
+
+    public override string GetDetailsString()
+    {
+        return $"SimpleGoal:{GetName()}|{GetDescription()}|{GetPoints()}|{_isComplete}";
+    }
+
 }

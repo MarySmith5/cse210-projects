@@ -4,23 +4,19 @@ public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description, int points) : base(name, description, points){}
 
-    public override void recordEvent()
+    public override int RecordEvent()
     {
-        throw new NotImplementedException();
-    }
-
-    public override bool IsComplete()
-    {
-        throw new NotImplementedException();
+        Console.WriteLine($"Congratulations! You have earned {GetPoints()} points!");
+        return GetPoints();
     }
 
     public override string GetStringRepresentation()
     {
-        string completion = "[ ]";
-        if (IsComplete())
-        {
-            completion = "[X]";
-        }
-        return $"{completion} {base.GetDetailsString()}";
+        return $"[ ] {GetStringRepresentationDetails()}";
+    }
+
+    public override string GetDetailsString()
+    {
+        return $"EternalGoal:{base.GetName()}|{base.GetDescription()}|{base.GetPoints()}";
     }
 }

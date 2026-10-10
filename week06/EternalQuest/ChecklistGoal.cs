@@ -13,23 +13,43 @@ public class ChecklistGoal : Goal
         _amountCompleted = 0;
     }
 
-    public override void recordEvent()
+    public void SetAmountCompleted(int amount)
     {
-        throw new NotImplementedException();
+        _amountCompleted = amount;
+    }
+
+    public override int RecordEvent()
+    {
+        int totalPoints;
+        _amountCompleted += 1;
+        if (_amountCompleted == _target)
+        {
+            totalPoints = GetPoints() + _bonus;
+            Console.WriteLine($"Congratulations! You have earned {totalPoints} points!");
+            return totalPoints;
+        }
+        totalPoints = GetPoints();
+        Console.WriteLine($"Congratulations! You have earned {totalPoints} points!");
+        return totalPoints;
     }
 
     public override bool IsComplete()
     {
-        throw new NotImplementedException();
+        return _amountCompleted == _target;
     }
 
     public override string GetStringRepresentation()
     {
-        throw new NotImplementedException();
+        string completion = "[ ]";
+        if (IsComplete())
+        {
+            completion = "[X]";
+        }
+        return $"{completion} {GetStringRepresentationDetails()} -- Currently completed: {_amountCompleted}/{_target}";
     }
 
-    // public override string GetDetailsString()
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public override string GetDetailsString()
+    {
+        return $"ChecklistGoal:{GetName()}|{GetDescription()}|{GetPoints()}|{_bonus}|{_target}|{_amountCompleted}";
+    }
 }
