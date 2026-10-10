@@ -1,8 +1,0 @@
-950
-HabitBreakingGoal:Nose-picking|Only blow nose on toilet paper|-66
-EternalGoal:No sugar|do not eat added sugar|100
-SimpleGoal:Finish goal program|turn it in|5000|False
-ChecklistGoal:workout|lift weights this week|100|1000|5|4
-EternalGoal:Read scriptures|daily reading/listening for 15 min|50
-SimpleGoal:Finish homework|week 6 CSE210|500|False
-ChecklistGoal:Temple|go to the temple 6 times this year|200|1000|6|1
