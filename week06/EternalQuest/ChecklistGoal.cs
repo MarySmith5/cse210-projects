@@ -33,7 +33,7 @@ public class ChecklistGoal : Goal
         return totalPoints;
     }
 
-    public override bool IsComplete()
+    protected override bool IsComplete()
     {
         return _amountCompleted == _target;
     }

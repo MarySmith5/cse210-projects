@@ -16,7 +16,7 @@ public class SimpleGoal : Goal
         return GetPoints();
     }
 
-    public override bool IsComplete()
+    protected override bool IsComplete()
     {
         return _isComplete;
     }
