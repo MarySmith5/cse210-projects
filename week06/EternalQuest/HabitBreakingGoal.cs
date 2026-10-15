@@ -33,6 +33,6 @@ public class HabitBreakingGoal : Goal
 
     public override string GetDetailsString()
     {
-        return $"HabitBreakingGoal:{GetName()}|{GetDescription()}|{GetPoints()}|_penalty";
+        return $"HabitBreakingGoal:{GetName()}|{GetDescription()}|{GetPoints()}|{_penalty}";
     }
 }
